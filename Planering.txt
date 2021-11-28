@@ -1,1 +1,2 @@
 Step 1: Setting upp git with branch.
+Step 2:
