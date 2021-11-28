@@ -1,5 +1,5 @@
 Step 1: Setting upp git with branch.
-Step 2: Setup 3 folders, Main(TollCalculator.java), Vehicle(Vehicle.java, Car.java, MotorBike.java), Test(TollCalculatorTest.java)
+Step 2: Setup 3 folders, Main(TollCalculator.java), Vehicle(Vehicle.java, Car.java, Motorcycle.java.java), Test(TollCalculatorTest.java)
 Step 3: Method getTollFee(), takes instances of different Vehicles. To charge them correct toll.
 Step 4: Class Vehicle sould hold tollfee and latest tolltime.
 Step 5: Method getTollFee sould take the time when the vehicle passes the tollcamera. With Mockdata of Vehicles.
