@@ -12,7 +12,5 @@ public class Main {
         int fee = tc.getTollFee(car, cameraFlashTime);
 
         System.out.println(fee); // prints out the fee when we are done calculating
-     
     }
-
 }
