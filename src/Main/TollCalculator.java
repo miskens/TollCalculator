@@ -18,23 +18,23 @@ public class TollCalculator {
     private int getFeeDependingOnHours(int hour, String vehicleType) {
         int fee = 0;
 
-        switch (hour){
+        switch (hour) {
             case 8:
             case 16:
                 fee = 18;
                 break;
             default:
-            switch(vehicleType){
-                case "Car":
-                    fee = 11;
-                    break;
-                case "Motorcycle":
-                    fee = 8;
-                    break;
-            }
+                switch (vehicleType) {
+                    case "Car":
+                        fee = 11;
+                        break;
+                    case "Motorcycle":
+                        fee = 8;
+                        break;
+                }
         }
 
         return fee;
-    }  
+    }
 
 }
