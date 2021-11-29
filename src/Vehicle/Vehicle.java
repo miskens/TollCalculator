@@ -6,4 +6,8 @@ public class Vehicle {
     public Vehicle(String regNr) {
         this.regNr = regNr;
     }
+
+    public String getRegNr() {
+        return this.regNr;
+    }
 }
