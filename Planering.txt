@@ -1,8 +1,8 @@
 Step 1: Setting upp git with branch.
 Step 2: Setup 3 folders, Main(TollCalculator.java), Vehicle(Vehicle.java, Car.java, Motorcycle.java.java), Test(TollCalculatorTest.java)
-Step 3: Method getTollFee(), takes instances of different Vehicles. To charge them correct toll.
-Step 4: Class Vehicle sould hold tollfee and latest tolltime.
-Step 5: Method getTollFee sould take the time when the vehicle passes the tollcamera. With Mockdata of Vehicles.
+    Step 3: Method getTollFee(), takes instances of different Vehicles. To charge them correct toll.
+Step 4: Method getTollFee sould take the time when the vehicle passes the tollcamera. With Mockdata of Vehicles.
+Step 5: Class Vehicle sould hold tollfee and latest tolltime.
 Step 6: Make a foreach loop that loops a list of timeslots (simulates Vehicles who passes by).
 Step 6.1: For each timeslot a random vehicle from list of Vehicles, and send vehicle and time to getTollFee.
 Step 7: Check cost with a switch case.
