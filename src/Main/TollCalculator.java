@@ -13,11 +13,18 @@ public class TollCalculator {
         DayOfWeek day = timeOfCurrentFlash.getDayOfWeek();
 
         if(currentFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
-            return currentFee;
+            return 0;
         }
 
         int fee = getFeeDependingOnHoursAndVehicleType(hour, vehicleType);
 
+        if (currentFee + fee >= 60) {
+            currentVehicle.setCurrentFee(60);
+            return 60 - currentFee;
+        }
+
+
+        currentVehicle.setCurrentFee(currentFee + fee);
         return fee;
     }
 
