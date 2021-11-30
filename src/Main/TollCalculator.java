@@ -10,31 +10,26 @@ public class TollCalculator {
         String vehicleType = currentVehicle.getClass().getSimpleName();
         int hour = timeOfCurrentFlash.getHour();
 
-        int fee = getFeeDependingOnHours(hour, vehicleType);
+        int fee = getFeeDependingOnHoursAndVehicleType(hour, vehicleType);
 
         return fee;
     }
 
-    private int getFeeDependingOnHours(int hour, String vehicleType) {
-        int fee = 0;
-
+    private int getFeeDependingOnHoursAndVehicleType(int hour, String vehicleType) {  
         switch (hour) {
             case 8:
             case 16:
-                fee = 18;
-                break;
+                return 18;
             default:
                 switch (vehicleType) {
                     case "Car":
-                        fee = 11;
-                        break;
+                        return 11;
                     case "Motorcycle":
-                        fee = 8;
-                        break;
+                        return 8;
+                    default:
+                    return 0;
                 }
         }
-
-        return fee;
     }
 
 }
