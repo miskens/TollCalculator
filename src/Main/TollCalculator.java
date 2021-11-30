@@ -15,7 +15,7 @@ public class TollCalculator {
         return fee;
     }
 
-    private int getFeeDependingOnHoursAndVehicleType(int hour, String vehicleType) {  
+    private int getFeeDependingOnHoursAndVehicleType(int hour, String vehicleType) {
         switch (hour) {
             case 8:
             case 16:
@@ -27,7 +27,7 @@ public class TollCalculator {
                     case "Motorcycle":
                         return 8;
                     default:
-                    return 0;
+                        return 0;
                 }
         }
     }
