@@ -2,13 +2,13 @@ r1:   Step 1: Setting upp git with branch.
 r2:   Step 2: Setup 3 folders, Main(TollCalculator.java), Vehicle(Vehicle.java, Car.java, Motorcycle.java.java), Test(TollCalculatorTest.java)
 r3:       Step 3: Method getTollFee(), takes instances of different Vehicles. To charge them correct toll.
 r4:   Step 4: Method getTollFee should take the time when the vehicle passes the tollcamera. With Mockdata of Vehicles.
-Step 5: Class Vehicle should hold tollfee and latest tolltime.
+r8:   Step 5: Class Vehicle should hold tollfee and latest tolltime.
 r5:   Step 6: Make a foreach loop that loops a list of timeslots (simulates Vehicles who passes by).
 r6:   Step 6.1: For each timeslot a random vehicle from list of Vehicles, and send vehicle and time to getTollFee.
 r7:   Step 7: Check cost with a switch case.
-Step 8: Check if max fee today is 60 or over, in that case no more toll.
-Step 9: Check if total fee for the day including current fee will be over 60. In that case, change to 60 (max for the day).
-Step 10: Check if it´s Weekend(Saturday or Sunday), then skip fee.
+r9:   Step 8: Check if max fee today is 60 or over, in that case no more toll.
+r11:  Step 9: Check if total fee for the day including current fee will be over 60. In that case, change to 60 (max for the day).
+r10:  Step 10: Check if it´s Weekend(Saturday or Sunday), then skip fee.
 Step 11: Check if last fee as within 1 hour. In that case the highest fee will be applied. 
 Step 11.1: If current fee is higher then last fee and apply current fee.
 Step 11.2: If the fee before was higher, apply that fee instead.
