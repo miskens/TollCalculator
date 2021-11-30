@@ -10,15 +10,15 @@ public class Main {
         TollCalculator tc = new TollCalculator();
         MockData mock = new MockData();
         Vehicle[] vehicles = mock.getListOfVehicles();
-        LocalDateTime[] cameraFlashes = mock.getCameraFlashes(20);
+        LocalDateTime[] cameraFlashes = mock.getRandomizedCameraFlashes(20);
         int fee;
 
         for(LocalDateTime flash : cameraFlashes){
             Random random = new Random();
             Vehicle vehicle = vehicles[random.nextInt(vehicles.length)];
             fee = tc.getTollFee(vehicle, flash);
-            System.out.println(vehicle.getClass().getSimpleName() + " with regNr: " + vehicle.getRegNr() + " at hour: " + flash.getHour());
-            System.out.println(fee);
+            System.out.println(vehicle.getClass().getSimpleName() + " with regNr: '" + vehicle.getRegNr() + "' at hour " + 
+                    flash.getHour() + ": " + fee + " kr.");
         }
     }
 }
