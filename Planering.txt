@@ -7,10 +7,10 @@ r5:   Step 6: Make a foreach loop that loops a list of timeslots (simulates Vehi
 r6:   Step 6.1: For each timeslot a random vehicle from list of Vehicles, and send vehicle and time to getTollFee.
 r7:   Step 7: Check cost with a switch case.
 r9:   Step 8: Check if max fee today is 60 or over, in that case no more toll.
-r11:  Step 9: Check if total fee for the day including current fee will be over 60. In that case, change to 60 (max for the day).
+r11:  Step 9: Check if total fee for the day including current fee will be over 60. In that case, change to 60 (max for the day). Return difference to 60.
 r10:  Step 10: Check if it´s Weekend(Saturday or Sunday), then skip fee.
-Step 11: Check if last fee as within 1 hour. In that case the highest fee will be applied. 
-Step 11.1: If current fee is higher then last fee and apply current fee.
+r12:  Step 11: Check if last fee is within 1 hour. In that case the highest fee will be applied. 
+r12.1 Step 11.1: If current fee is higher then last fee and apply current fee.
 Step 11.2: If the fee before was higher, apply that fee instead.
 
 r: Is the real/actual order that the implementation was done, and a way to look back and learn how well the planning was done. A way for us

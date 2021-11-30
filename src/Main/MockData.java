@@ -31,12 +31,12 @@ public class MockData {
         LocalDateTime[] cameraFlashes = new LocalDateTime[numberOfFLashes];
         Random random = new Random();
         int randomHour;
-        int randomDay;
+        int day = 1;
 
         for (int i = 0; i < cameraFlashes.length; i++) {
             randomHour = random.nextInt(23);
-            randomDay = random.nextInt(30) +1;
-            cameraFlashes[i] = LocalDateTime.of(2021, 11, randomDay, randomHour, 31, 00);
+            cameraFlashes[i] = LocalDateTime.of(2021, 11, day, randomHour, 31, 00);
+            day++;
         }
 
         return cameraFlashes;

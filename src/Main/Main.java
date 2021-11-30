@@ -10,15 +10,17 @@ public class Main {
         TollCalculator tc = new TollCalculator();
         MockData mock = new MockData();
         Vehicle[] vehicles = mock.getListOfVehicles();
-        LocalDateTime[] cameraFlashes = mock.getRandomizedCameraFlashes(60);
+        LocalDateTime[] cameraFlashes = mock.getRandomizedCameraFlashes(28);
         int currentFee = 0;
+        int lastFee = 0;
         int fee;
 
         for (LocalDateTime flash : cameraFlashes) {
             Random random = new Random();
             Vehicle vehicle = vehicles[random.nextInt(vehicles.length)];
             currentFee = vehicle.getCurrentFee();
-            fee = tc.getTollFee(vehicle, currentFee, flash);
+            lastFee = vehicle.getLastFee();
+            fee = tc.getTollFee(vehicle, lastFee, currentFee, flash);
             if (currentFee >= 60) {
                 System.out.println(vehicle.getRegNr() + " has reached max fee, toll free!");
             }
@@ -30,6 +32,7 @@ public class Main {
                 .println(vehicle.getClass().getSimpleName() + " with regNr: '" + vehicle.getRegNr() + "' at hour " +
                         flash.getHour() + ": " + fee + " kr.");
             }
+            System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentFee());
         }
     }
 }

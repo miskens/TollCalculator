@@ -1,6 +1,9 @@
 package Vehicle;
 
+import java.time.LocalDateTime;
+
 public class Vehicle {
+    protected LocalDateTime timeOfLastCameraFlash;
     protected int currentFee;
     protected int lastFee;
     protected String regNr;
@@ -29,5 +32,13 @@ public class Vehicle {
 
     public String getRegNr() {
         return this.regNr;
+    }
+
+    public LocalDateTime getTimeOfLastCameraFlash() {
+        return this.timeOfLastCameraFlash;
+    }
+
+    public void setTimeOfLastCameraFlash(LocalDateTime timeofLastCameraFlash) {
+        this.timeOfLastCameraFlash = timeofLastCameraFlash;
     }
 }
