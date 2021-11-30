@@ -10,12 +10,14 @@ public class Main {
         MockData mock = new MockData();
         Vehicle[] vehicles = mock.getListOfVehicles();
         LocalDateTime[] cameraFlashes = mock.getRandomizedCameraFlashes(20);
+        int currentFee = 0;
         int fee;
 
         for (LocalDateTime flash : cameraFlashes) {
             Random random = new Random();
             Vehicle vehicle = vehicles[random.nextInt(vehicles.length)];
-            fee = tc.getTollFee(vehicle, flash);
+            currentFee = vehicle.getCurrentFee();
+            fee = tc.getTollFee(vehicle, currentFee, flash);
             System.out
                     .println(vehicle.getClass().getSimpleName() + " with regNr: '" + vehicle.getRegNr() + "' at hour " +
                             flash.getHour() + ": " + fee + " kr.");
