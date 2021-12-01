@@ -10,7 +10,7 @@ public class Main {
         TollCalculator tc = new TollCalculator();
         MockData mock = new MockData();
         Vehicle[] vehicles = mock.getListOfVehicles();
-        LocalDateTime[] cameraFlashes = mock.getRandomizedCameraFlashes(28);
+        LocalDateTime[] cameraFlashes = mock.getRandomizedCameraFlashes(29);
         int currentFee = 0;
         int lastFee = 0;
         int fee;
