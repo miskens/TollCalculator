@@ -11,7 +11,7 @@ r11:  Step 9: Check if total fee for the day including current fee will be over 
 r10:  Step 10: Check if it´s Weekend(Saturday or Sunday), then skip fee.
 r12:  Step 11: Check if last fee is within 1 hour. In that case the highest fee will be applied. 
 r12.1 Step 11.1: If current fee is higher then last fee and apply current fee.
-Step 11.2: If the fee before was higher, apply that fee instead.
+r12.2 Step 11.2: If the fee before was higher, apply that fee instead.
 
 r: Is the real/actual order that the implementation was done, and a way to look back and learn how well the planning was done. A way for us
     to learn something for the next time.

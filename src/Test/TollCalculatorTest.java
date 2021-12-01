@@ -30,6 +30,7 @@ public class TollCalculatorTest {
 
         // Assert
         Assert.assertArrayEquals(actual, expected);
+        System.out.println("testFeesVariesBetween8and18 OK!");
     }
 
     @Test
@@ -48,6 +49,7 @@ public class TollCalculatorTest {
 
         // Assert
         Assert.assertArrayEquals(expected, actuals);
+        System.out.println("testThereAreVehiclesTypesOfCarAndMotorcycles OK!");
     }
 
     @Test
@@ -66,6 +68,7 @@ public class TollCalculatorTest {
 
         // Assert
         Assert.assertArrayEquals(actual, expected);
+        System.out.println("testRushHourFeesAppliesForBothHours8And16 OK!");
     }
 
     @Test
@@ -85,6 +88,7 @@ public class TollCalculatorTest {
 
         // Assert
         Assert.assertEquals(expected, actual);
+        System.out.println("testFeeCanNeverBeHigherThan60 OK!");
     }
 
     @Test
@@ -105,6 +109,7 @@ public class TollCalculatorTest {
 
         // Assert
         Assert.assertEquals(expected, actual);
+        System.out.println("testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee OK!");
     }
 
     @Test
@@ -125,6 +130,7 @@ public class TollCalculatorTest {
 
         // Assert
         Assert.assertEquals(expected, actual);
+        System.out.println("testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee OK!");
     }
 
     @Test
