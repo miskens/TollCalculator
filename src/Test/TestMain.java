@@ -10,5 +10,6 @@ public class TestMain {
         tct.testFeeCanNeverBeHigherThan60();
         tct.testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee();
         tct.testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee();
+        tct.testNoFeeOnSaturdayOrSunday();
     }
 }

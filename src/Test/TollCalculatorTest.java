@@ -150,5 +150,6 @@ public class TollCalculatorTest {
 
         // Assert
         Assert.assertEquals(actual, expected);
+        System.out.println("testNoFeeOnSaturdayOrSunday OK!");
     }
 }
