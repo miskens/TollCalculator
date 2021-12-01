@@ -6,5 +6,4 @@ public class TestMain {
 
         tct.testFeesVariesBetween8and18();
     }
-
 }
