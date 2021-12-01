@@ -50,23 +50,21 @@ public class TollCalculatorTest {
         Assert.assertArrayEquals(expected, actuals);
     }
 
-    
-
     @Test
     public void testRushHourFeesAppliesForBothHours8And16() {
         // Setup
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee8 = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11,30,8,10,0));
-        int fee16 = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11,30,16,10,0));
+        int fee8 = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
+        int fee16 = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 16, 10, 0));
 
         // Actual
-        int[] actual = {fee8, fee16};
+        int[] actual = { fee8, fee16 };
 
         // Expected
-        int[] expected = {18, 18};
+        int[] expected = { 18, 18 };
 
-        //Assert
+        // Assert
         Assert.assertArrayEquals(actual, expected);
     }
 
@@ -76,7 +74,7 @@ public class TollCalculatorTest {
         int feebefore = 58;
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee = tc.getTollFee(car, 0, feebefore, LocalDateTime.of(2021, 11,30,8,10,0));
+        int fee = tc.getTollFee(car, 0, feebefore, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
         int maxFee = feebefore + fee;
 
         // Actual
@@ -94,8 +92,9 @@ public class TollCalculatorTest {
         // Setup
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11,30,7,50,0)); // To set time of last camera flash on car
-        int fee2 = tc.getTollFee(car, 11, 0, LocalDateTime.of(2021, 11,30,8,5,0));
+        int fee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 7, 50, 0)); // To set time of last camera
+                                                                                      // flash on car
+        int fee2 = tc.getTollFee(car, 11, 0, LocalDateTime.of(2021, 11, 30, 8, 5, 0));
         int maxFee = fee + fee2;
 
         // Actual
@@ -113,8 +112,9 @@ public class TollCalculatorTest {
         // Setup
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11,30,8,50,0)); // To set time of last camera flash on car
-        int fee2 = tc.getTollFee(car, 11, 0, LocalDateTime.of(2021, 11,30,9,5,0));
+        int fee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 50, 0)); // To set time of last camera
+                                                                                      // flash on car
+        int fee2 = tc.getTollFee(car, 11, 0, LocalDateTime.of(2021, 11, 30, 9, 5, 0));
         int maxFee = fee + fee2;
 
         // Actual
@@ -125,5 +125,24 @@ public class TollCalculatorTest {
 
         // Assert
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNoFeeOnSaturdayOrSunday() {
+        // setup
+        Car car = new Car("");
+        TollCalculator tc = new TollCalculator();
+        int fee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 13, 9, 50, 0)); // Saturday
+        int fee2 = tc.getTollFee(car, 11, 0, LocalDateTime.of(2021, 11, 14, 10, 5, 0)); // Sunday
+        int noFee = fee + fee2;
+
+        // actual
+        int actual = noFee;
+
+        // Expected
+        int expected = 0;
+
+        // Assert
+        Assert.assertEquals(actual, expected);
     }
 }

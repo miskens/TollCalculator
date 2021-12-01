@@ -15,7 +15,7 @@ public class MockData {
         Motorcycle mc1 = new Motorcycle("442 lkf");
         Motorcycle mc2 = new Motorcycle("556 igv");
         Motorcycle mc3 = new Motorcycle("986 ruf");
-        
+
         Vehicle[] vehicles = new Vehicle[6];
         vehicles[0] = car1;
         vehicles[1] = car2;
@@ -23,7 +23,7 @@ public class MockData {
         vehicles[3] = mc1;
         vehicles[4] = mc2;
         vehicles[5] = mc3;
-        
+
         return vehicles;
     }
 
