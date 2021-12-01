@@ -3,7 +3,6 @@ package Main;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-
 import Vehicle.Vehicle;
 
 public class TollCalculator {
@@ -15,7 +14,7 @@ public class TollCalculator {
         LocalDateTime timeOfLastCameraFlash;
         DayOfWeek day = timeOfCurrentFlash.getDayOfWeek();
 
-        if(currentFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
+        if (currentFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
             return 0;
         }
 
@@ -25,15 +24,13 @@ public class TollCalculator {
             timeOfLastCameraFlash = currentVehicle.getTimeOfLastCameraFlash();
             long minutesSinceLastFlash = timeOfLastCameraFlash.until(timeOfCurrentFlash, ChronoUnit.MINUTES);
 
-            if(minutesSinceLastFlash <= 60) {
-                if(lastFee > fee) {
+            if (minutesSinceLastFlash <= 60) {
+                if (lastFee > fee) {
                     return lastFee - fee;
-                }
-                else if (fee > lastFee) {
+                } else if (fee > lastFee) {
                     currentVehicle.setLastFee(fee);
                     return fee - lastFee;
-                }
-                else {
+                } else {
                     return 0;
                 }
             }
@@ -66,5 +63,4 @@ public class TollCalculator {
                 }
         }
     }
-
 }

@@ -11,5 +11,4 @@ public class TestMain {
         tct.testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee();
         tct.testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee();
     }
-
 }
