@@ -11,18 +11,8 @@ import Vehicle.Motorcycle;
 import Vehicle.Vehicle;
 
 public class TollCalculatorTest {
-    public static void main(String[] args) {
-        testFeesVariesBetween8and18();
-        testThereAreVehiclesTypesOfCarAndMotorcycles();
-        testRushHourFeesAppliesForBothHours8And16();
-        testFeeCanNeverBeHigherThan60();
-        testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee();
-        testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee();
-        testNoFeeOnSaturdayOrSunday();
-    }
-
     @Test
-    public static void testFeesVariesBetween8and18() {
+    public void testFeesVariesBetween8and18() {
         // setup
         Motorcycle mc = new Motorcycle("");
         Car car = new Car("");
@@ -43,7 +33,7 @@ public class TollCalculatorTest {
     }
 
     @Test
-    public static void testThereAreVehiclesTypesOfCarAndMotorcycles() {
+    public void testThereAreVehiclesTypesOfCarAndMotorcycles() {
         // setup
         Vehicle mc = new Motorcycle("");
         Vehicle car = new Car("");
@@ -62,7 +52,7 @@ public class TollCalculatorTest {
     }
 
     @Test
-    public static void testRushHourFeesAppliesForBothHours8And16() {
+    public void testRushHourFeesAppliesForBothHours8And16() {
         // Setup
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
@@ -81,7 +71,7 @@ public class TollCalculatorTest {
     }
 
     @Test
-    public static void testFeeCanNeverBeHigherThan60() {
+    public void testFeeCanNeverBeHigherThan60() {
         // Setup
         int feebefore = 58;
         Car car = new Car("");
@@ -101,7 +91,7 @@ public class TollCalculatorTest {
     }
 
     @Test
-    public static void testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee() {
+    public void testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee() {
         // Setup
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
@@ -122,7 +112,7 @@ public class TollCalculatorTest {
     }
 
     @Test
-    public static void testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee() {
+    public void testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee() {
         // Setup
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
@@ -143,7 +133,7 @@ public class TollCalculatorTest {
     }
 
     @Test
-    public static void testNoFeeOnSaturdayOrSunday() {
+    public void testNoFeeOnSaturdayOrSunday() {
         // setup
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
