@@ -17,6 +17,7 @@ public class Main {
 
         printInfoAboutVehicles(vehicles);
 
+        int rowNr = 1;
         for (LocalDateTime flash : cameraFlashes) {
             Random random = new Random();
             Vehicle vehicle = vehicles[random.nextInt(vehicles.length)];
@@ -24,7 +25,9 @@ public class Main {
             lastFee = vehicle.getLastFee();
             fee = tc.getTollFee(vehicle, lastFee, currentFee, flash);
 
-            printCameraFlashInfo(vehicle, flash, currentFee, fee);
+            System.out.println("Vehicle nr: " + rowNr);
+            printCameraFlashInfo(rowNr, vehicle, flash, currentFee, fee);
+            rowNr++;
         }
     }
 
@@ -38,7 +41,9 @@ public class Main {
         System.out.println();
     }
 
-    private static void printCameraFlashInfo(Vehicle vehicle, LocalDateTime flash, int currentFee, int fee) {
+    private static void printCameraFlashInfo(int rowNr, Vehicle vehicle, LocalDateTime flash, int currentFee, int fee) {
+
+        
         if (currentFee >= 60) {
             System.out.println(vehicle.getRegNr() + " has reached max fee, toll free!");
         }
@@ -50,6 +55,6 @@ public class Main {
             .println(vehicle.getClass().getSimpleName() + " with regNr: '" + vehicle.getRegNr() + "' at hour " +
                     flash.getHour() + ": " + fee + " kr.");
         }
-        System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentFee());
+        System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentFee() + "\n");
     }
 }
