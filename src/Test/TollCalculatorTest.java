@@ -11,7 +11,6 @@ import Vehicle.Motorcycle;
 import Vehicle.Vehicle;
 
 public class TollCalculatorTest {
-
     @Test
     public void testFeesVariesBetween8and18() {
         // setup

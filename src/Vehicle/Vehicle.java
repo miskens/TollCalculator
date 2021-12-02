@@ -4,22 +4,24 @@ import java.time.LocalDateTime;
 
 public class Vehicle {
     protected LocalDateTime timeOfLastCameraFlash;
-    protected int currentFee;
+    protected int currentTotalFee;
     protected int lastFee;
     protected String regNr;
+    private static int nrOfVehicles = 0;
 
     public Vehicle(String regNr) {
-        this.currentFee = 0;
+        this.currentTotalFee = 0;
         this.lastFee = 0;
         this.regNr = regNr;
+        nrOfVehicles++;
     }
 
-    public int getCurrentFee() {
-        return this.currentFee;
+    public int getCurrentTotalFee() {
+        return this.currentTotalFee;
     }
 
-    public void setCurrentFee(int fee) {
-        this.currentFee = fee;
+    public void setCurrentTotalFee(int fee) {
+        this.currentTotalFee = fee;
     }
 
     public int getLastFee() {
@@ -40,5 +42,9 @@ public class Vehicle {
 
     public void setTimeOfLastCameraFlash(LocalDateTime timeofLastCameraFlash) {
         this.timeOfLastCameraFlash = timeofLastCameraFlash;
+    }
+
+    public static int getNrOfVehicles() {
+        return nrOfVehicles;
     }
 }

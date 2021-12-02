@@ -2,14 +2,13 @@ package Test;
 
 public class TestMain {
     public static void main(String[] args) {
-        TollCalculatorTest tct = new TollCalculatorTest();
-
-        tct.testFeesVariesBetween8and18();
-        tct.testThereAreVehiclesTypesOfCarAndMotorcycles();
-        tct.testRushHourFeesAppliesForBothHours8And16();
-        tct.testFeeCanNeverBeHigherThan60();
-        tct.testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee();
-        tct.testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee();
-        tct.testNoFeeOnSaturdayOrSunday();
+        TollCalculatorTest tollcalcTest = new TollCalculatorTest();
+        tollcalcTest.testFeesVariesBetween8and18();
+        tollcalcTest.testThereAreVehiclesTypesOfCarAndMotorcycles();
+        tollcalcTest.testRushHourFeesAppliesForBothHours8And16();
+        tollcalcTest.testFeeCanNeverBeHigherThan60();
+        tollcalcTest.testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee();
+        tollcalcTest.testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee();
+        tollcalcTest.testNoFeeOnSaturdayOrSunday();
     }
 }
