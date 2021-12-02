@@ -7,11 +7,13 @@ public class Vehicle {
     protected int currentFee;
     protected int lastFee;
     protected String regNr;
+    private static int nrOfVehicles = 0;
 
     public Vehicle(String regNr) {
         this.currentFee = 0;
         this.lastFee = 0;
         this.regNr = regNr;
+        nrOfVehicles++;
     }
 
     public int getCurrentFee() {
@@ -40,5 +42,9 @@ public class Vehicle {
 
     public void setTimeOfLastCameraFlash(LocalDateTime timeofLastCameraFlash) {
         this.timeOfLastCameraFlash = timeofLastCameraFlash;
+    }
+
+    public static int getNrOfVehicles() {
+        return nrOfVehicles;
     }
 }
