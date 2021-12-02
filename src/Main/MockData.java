@@ -9,20 +9,14 @@ import Vehicle.Vehicle;
 
 public class MockData {
     public Vehicle[] getListOfVehicles() {
-        Car car1 = new Car("678 iao");
-        Car car2 = new Car("272 ztc");
-        Car car3 = new Car("479 hdy");
-        Motorcycle mc1 = new Motorcycle("442 lkf");
-        Motorcycle mc2 = new Motorcycle("556 igv");
-        Motorcycle mc3 = new Motorcycle("986 ruf");
-
-        Vehicle[] vehicles = new Vehicle[6];
-        vehicles[0] = car1;
-        vehicles[1] = car2;
-        vehicles[2] = car3;
-        vehicles[3] = mc1;
-        vehicles[4] = mc2;
-        vehicles[5] = mc3;
+        Vehicle[] vehicles = {
+            new Car("678 iao"),
+            new Car("272 ztc"),
+            new Car("479 hdy"),
+            new Motorcycle("442 lkf"),
+            new Motorcycle("556 igv"),
+            new Motorcycle("986 ruf")
+        };
 
         return vehicles;
     }
