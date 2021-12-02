@@ -15,24 +15,37 @@ public class Main {
         int lastFee = 0;
         int fee;
 
+        System.out.println("Number of Vehicles used in this program: " + Vehicle.getNrOfVehicles());
+        System.out.println("These are the vehicles:\n");
+
+        for (Vehicle v : vehicles) {
+            System.out.println(v.getClass().getSimpleName() + " with regNr: " + v.getRegNr());
+        }
+        System.out.println();
+
         for (LocalDateTime flash : cameraFlashes) {
             Random random = new Random();
             Vehicle vehicle = vehicles[random.nextInt(vehicles.length)];
             currentFee = vehicle.getCurrentFee();
             lastFee = vehicle.getLastFee();
             fee = tc.getTollFee(vehicle, lastFee, currentFee, flash);
-            if (currentFee >= 60) {
-                System.out.println(vehicle.getRegNr() + " has reached max fee, toll free!");
-            }
-            else if(flash.getDayOfWeek() == DayOfWeek.SATURDAY || flash.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                System.out.println("Weekend! Toll free drive!");
-            }
-            else {
-                System.out
-                .println(vehicle.getClass().getSimpleName() + " with regNr: '" + vehicle.getRegNr() + "' at hour " +
-                        flash.getHour() + ": " + fee + " kr.");
-            }
-            System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentFee());
+
+            printInformation(vehicle, flash, currentFee, fee);
         }
+    }
+
+    private static void printInformation(Vehicle vehicle, LocalDateTime flash, int currentFee, int fee) {
+        if (currentFee >= 60) {
+            System.out.println(vehicle.getRegNr() + " has reached max fee, toll free!");
+        }
+        else if(flash.getDayOfWeek() == DayOfWeek.SATURDAY || flash.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            System.out.println("Weekend! Toll free drive!");
+        }
+        else {
+            System.out
+            .println(vehicle.getClass().getSimpleName() + " with regNr: '" + vehicle.getRegNr() + "' at hour " +
+                    flash.getHour() + ": " + fee + " kr.");
+        }
+        System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentFee());
     }
 }
