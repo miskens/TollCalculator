@@ -7,19 +7,21 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        TollCalculator tc = new TollCalculator();
         MockData mock = new MockData();
         Vehicle[] vehicles = mock.getListOfVehicles();
         LocalDateTime[] cameraFlashes = mock.getFlashes(29);
         int currentTotalFee = 0;
         int lastFee = 0;
-        int fee;
+        int fee = 0;
 
         printInfoAboutVehicles(vehicles);
+        printAllCameraFlashesInfo(cameraFlashes, vehicles, currentTotalFee, lastFee, fee);
+    }
 
-        // Create a new method and move all of the code below(in main method) to the new method.
-        // Call the new method from here in 1 line of code
-
+    private static void printAllCameraFlashesInfo(LocalDateTime[] cameraFlashes, Vehicle[] vehicles,
+            int currentTotalFee,
+            int lastFee, int fee) {
+        TollCalculator tc = new TollCalculator();
         int rowNr = 1;
         for (LocalDateTime flash : cameraFlashes) {
             Random random = new Random();
@@ -29,7 +31,7 @@ public class Main {
             fee = tc.getTollFee(vehicle, lastFee, currentTotalFee, flash);
 
             System.out.println("Vehicle nr: " + rowNr);
-            printCameraFlashInfo(rowNr, vehicle, flash, currentTotalFee, fee); //Change name to printCurrent...
+            printCurrentCamerFlashInfo(rowNr, vehicle, flash, currentTotalFee, fee);
             rowNr++;
         }
     }
@@ -46,20 +48,19 @@ public class Main {
         System.out.println();
     }
 
-    private static void printCameraFlashInfo(int rowNr, Vehicle vehicle, LocalDateTime flash, int currentTotalFee, int fee) {
+    private static void printCurrentCamerFlashInfo(int rowNr, Vehicle vehicle, LocalDateTime flash, int currentTotalFee,
+            int fee) {
 
         String vehicleSubclass = vehicle.getClass().getSimpleName();
         System.out.println(vehicleSubclass + " with regNr: '" + vehicle.getRegNr() + ":");
 
         if (currentTotalFee >= 60) {
             System.out.println(vehicle.getRegNr() + " has reached max fee, toll: " + fee + " kr.");
-        }
-        else if(flash.getDayOfWeek() == DayOfWeek.SATURDAY || flash.getDayOfWeek() == DayOfWeek.SUNDAY) {
+        } else if (flash.getDayOfWeek() == DayOfWeek.SATURDAY || flash.getDayOfWeek() == DayOfWeek.SUNDAY) {
             System.out.println("Weekend! Toll is " + fee + " kr.");
-        }
-        else {
+        } else {
             System.out
-            .println("Passed at hour " + flash.getHour() + ": " + fee + " kr.");
+                    .println("Passed at hour " + flash.getHour() + ": " + fee + " kr.");
         }
         System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentTotalFee() + " kr.\n");
     }
