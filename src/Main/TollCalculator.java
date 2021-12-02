@@ -7,14 +7,14 @@ import Vehicle.Vehicle;
 
 public class TollCalculator {
 
-    public int getTollFee(Vehicle currentVehicle, int lastFee, int currentFee, LocalDateTime timeOfCurrentFlash) {
+    public int getTollFee(Vehicle currentVehicle, int lastFee, int currentTotalFee, LocalDateTime timeOfCurrentFlash) {
         String vehicleType = currentVehicle.getClass().getSimpleName();
         int fee;
         int hour = timeOfCurrentFlash.getHour();
         LocalDateTime timeOfLastCameraFlash;
         DayOfWeek day = timeOfCurrentFlash.getDayOfWeek();
 
-        if (currentFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
+        if (currentTotalFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
             return 0;
         }
 
@@ -36,12 +36,12 @@ public class TollCalculator {
             }
         }
 
-        if (currentFee + fee >= 60) {
+        if (currentTotalFee + fee >= 60) {
             currentVehicle.setCurrentFee(60);
-            return 60 - currentFee;
+            return 60 - currentTotalFee;
         }
 
-        currentVehicle.setCurrentFee(currentFee + fee);
+        currentVehicle.setCurrentFee(currentTotalFee + fee);
         currentVehicle.setLastFee(fee);
         currentVehicle.setTimeOfLastCameraFlash(timeOfCurrentFlash);
         return fee;
