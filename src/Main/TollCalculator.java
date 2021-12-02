@@ -37,11 +37,11 @@ public class TollCalculator {
         }
 
         if (currentTotalFee + fee >= 60) {
-            currentVehicle.setCurrentFee(60);
+            currentVehicle.setCurrentTotalFee(60);
             return 60 - currentTotalFee;
         }
 
-        currentVehicle.setCurrentFee(currentTotalFee + fee);
+        currentVehicle.setCurrentTotalFee(currentTotalFee + fee);
         currentVehicle.setLastFee(fee);
         currentVehicle.setTimeOfLastCameraFlash(timeOfCurrentFlash);
         return fee;

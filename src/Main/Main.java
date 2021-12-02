@@ -24,7 +24,7 @@ public class Main {
         for (LocalDateTime flash : cameraFlashes) {
             Random random = new Random();
             Vehicle vehicle = vehicles[random.nextInt(vehicles.length)];
-            currentTotalFee = vehicle.getCurrentFee();
+            currentTotalFee = vehicle.getCurrentTotalFee();
             lastFee = vehicle.getLastFee();
             fee = tc.getTollFee(vehicle, lastFee, currentTotalFee, flash);
 
@@ -61,6 +61,6 @@ public class Main {
             System.out
             .println("Passed at hour " + flash.getHour() + ": " + fee + " kr.");
         }
-        System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentFee() + " kr.\n");
+        System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentTotalFee() + " kr.\n");
     }
 }
