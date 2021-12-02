@@ -10,18 +10,12 @@ public class Main {
         TollCalculator tc = new TollCalculator();
         MockData mock = new MockData();
         Vehicle[] vehicles = mock.getListOfVehicles();
-        LocalDateTime[] cameraFlashes = mock.getRandomizedCameraFlashes(29);
+        LocalDateTime[] cameraFlashes = mock.getFlashes(29);
         int currentFee = 0;
         int lastFee = 0;
         int fee;
 
-        System.out.println("Number of Vehicles used in this program: " + Vehicle.getNrOfVehicles());
-        System.out.println("These are the vehicles:\n");
-
-        for (Vehicle v : vehicles) {
-            System.out.println(v.getClass().getSimpleName() + " with regNr: " + v.getRegNr());
-        }
-        System.out.println();
+        printInfoAboutVehicles(vehicles);
 
         for (LocalDateTime flash : cameraFlashes) {
             Random random = new Random();
@@ -30,11 +24,21 @@ public class Main {
             lastFee = vehicle.getLastFee();
             fee = tc.getTollFee(vehicle, lastFee, currentFee, flash);
 
-            printInformation(vehicle, flash, currentFee, fee);
+            printCameraFlashInfo(vehicle, flash, currentFee, fee);
         }
     }
 
-    private static void printInformation(Vehicle vehicle, LocalDateTime flash, int currentFee, int fee) {
+    private static void printInfoAboutVehicles(Vehicle[] vehicles) {
+        System.out.println("Number of Vehicles used in this program: " + Vehicle.getNrOfVehicles());
+        System.out.println("These are the vehicles:\n");
+
+        for (Vehicle v : vehicles) {
+            System.out.println(v.getClass().getSimpleName() + " with regNr: " + v.getRegNr());
+        }
+        System.out.println();
+    }
+
+    private static void printCameraFlashInfo(Vehicle vehicle, LocalDateTime flash, int currentFee, int fee) {
         if (currentFee >= 60) {
             System.out.println(vehicle.getRegNr() + " has reached max fee, toll free!");
         }

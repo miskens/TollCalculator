@@ -21,18 +21,24 @@ public class MockData {
         return vehicles;
     }
 
-    public LocalDateTime[] getRandomizedCameraFlashes(int numberOfFLashes) {
+    public LocalDateTime[] getFlashes(int numberOfFLashes) {
         LocalDateTime[] cameraFlashes = new LocalDateTime[numberOfFLashes];
-        Random random = new Random();
-        int randomHour;
+       
+        cameraFlashes = getRandomizedCameraFlashes(cameraFlashes);
+
+        return cameraFlashes;
+    }
+
+    private LocalDateTime[] getRandomizedCameraFlashes(LocalDateTime[] cameraFlashes) {
         int day = 1;
+        int randomHour;
+        Random random = new Random();
 
         for (int i = 0; i < cameraFlashes.length; i++) {
             randomHour = random.nextInt(23);
             cameraFlashes[i] = LocalDateTime.of(2021, 11, day, randomHour, 31, 00);
             day++;
         }
-
         return cameraFlashes;
     }
 }
