@@ -26,7 +26,7 @@ public class Main {
             fee = tc.getTollFee(vehicle, lastFee, currentFee, flash);
 
             System.out.println("Vehicle nr: " + rowNr);
-            printCameraFlashInfo(rowNr, vehicle, flash, currentFee, fee);
+            printCameraFlashInfo(rowNr, vehicle, flash, currentFee, fee); //Change name to printCurrent...
             rowNr++;
         }
     }
@@ -35,26 +35,29 @@ public class Main {
         System.out.println("Number of Vehicles used in this program: " + Vehicle.getNrOfVehicles());
         System.out.println("These are the vehicles:\n");
 
+        String vehicleSubclass;
         for (Vehicle v : vehicles) {
-            System.out.println(v.getClass().getSimpleName() + " with regNr: " + v.getRegNr());
+            vehicleSubclass = v.getClass().getSimpleName();
+            System.out.println(vehicleSubclass + " with regNr: " + v.getRegNr());
         }
         System.out.println();
     }
 
     private static void printCameraFlashInfo(int rowNr, Vehicle vehicle, LocalDateTime flash, int currentFee, int fee) {
 
-        
+        String vehicleSubclass = vehicle.getClass().getSimpleName();
+        System.out.println(vehicleSubclass + " with regNr: '" + vehicle.getRegNr() + ":");
+
         if (currentFee >= 60) {
-            System.out.println(vehicle.getRegNr() + " has reached max fee, toll free!");
+            System.out.println(vehicle.getRegNr() + " has reached max fee, toll: " + fee + " kr.");
         }
         else if(flash.getDayOfWeek() == DayOfWeek.SATURDAY || flash.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            System.out.println("Weekend! Toll free drive!");
+            System.out.println("Weekend! Toll is " + fee + " kr.");
         }
         else {
             System.out
-            .println(vehicle.getClass().getSimpleName() + " with regNr: '" + vehicle.getRegNr() + "' at hour " +
-                    flash.getHour() + ": " + fee + " kr.");
+            .println("Passed at hour " + flash.getHour() + ": " + fee + " kr.");
         }
-        System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentFee() + "\n");
+        System.out.println("Total Fee of Vehicle above: " + vehicle.getCurrentFee() + " kr.\n");
     }
 }
