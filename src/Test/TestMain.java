@@ -6,7 +6,7 @@ public class TestMain {
         tollcalcTest.testFeesVariesBetween8and18();
         tollcalcTest.testThereAreVehiclesTypesOfCarAndMotorcycles();
         tollcalcTest.testRushHourFeesAppliesForBothHours8And16();
-        tollcalcTest.testFeeCanNeverBeHigherThan60();
+        tollcalcTest.testDailyFeeCanNeverBeHigherThan60();
         tollcalcTest.testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee();
         tollcalcTest.testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee();
         tollcalcTest.testNoFeeOnSaturdayOrSunday();
