@@ -24,6 +24,20 @@ public class TollCalculator {
 
         fee = getFeeDependingOnHoursAndVehicleType(hour, vehicleType);
 
+        fee = calculateFeeWithinSameHour(currentVehicle, timeOfLastCameraFlash, timeOfCurrentFlash, lastFee, fee);
+
+        if (currentTotalFee + fee >= 60) {
+            currentVehicle.setCurrentTotalFee(60);
+            return 60 - currentTotalFee;
+        }
+
+        updateCurrentVehicle(currentVehicle, currentTotalFee, fee, timeOfCurrentFlash);
+
+        return fee;
+    }
+
+    private int calculateFeeWithinSameHour(Vehicle currentVehicle, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash,
+                                                        int lastFee, int fee) {
         if (currentVehicle.getTimeOfLastCameraFlash() != null) { 
             long minutesSinceLastFlash = timeOfLastCameraFlash.until(timeOfCurrentFlash, ChronoUnit.MINUTES);
 
@@ -38,13 +52,7 @@ public class TollCalculator {
                 }
             }
         }
-
-        if (currentTotalFee + fee >= 60) {
-            currentVehicle.setCurrentTotalFee(60);
-            return 60 - currentTotalFee;
-        }
-
-        updateCurrentVehicle(currentVehicle, currentTotalFee, fee, timeOfCurrentFlash);
+        
         return fee;
     }
 
