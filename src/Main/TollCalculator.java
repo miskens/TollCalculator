@@ -15,7 +15,7 @@ public class TollCalculator {
         DayOfWeek day = timeOfCurrentFlash.getDayOfWeek();
 
         if (timeOfLastCameraFlash != null) {
-            resetcurrentTotalFeeForNewday(vehicles, timeOfCurrentFlash.getDayOfMonth(), timeOfLastCameraFlash.getDayOfMonth(), currentVehicle);
+            resetCurrentTotalFeeForNewday(vehicles, timeOfCurrentFlash.getDayOfMonth(), timeOfLastCameraFlash.getDayOfMonth(), currentVehicle);
         }
 
         if (currentTotalFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
@@ -44,13 +44,17 @@ public class TollCalculator {
             return 60 - currentTotalFee;
         }
 
-        currentVehicle.setCurrentTotalFee(currentTotalFee + fee);
-        currentVehicle.setLastFee(fee);
-        currentVehicle.setTimeOfLastCameraFlash(timeOfCurrentFlash);
+        updateCurrentVehicle(currentVehicle, currentTotalFee, fee, timeOfCurrentFlash);
         return fee;
     }
 
-    private void resetcurrentTotalFeeForNewday(Vehicle[] vehicles, int dayOfMonth, int dayOfMonth2, Vehicle currentVehicle) {
+    private void updateCurrentVehicle(Vehicle currentVehicle, int currentTotalFee, int fee, LocalDateTime timeOfCurrentFlash) {
+        currentVehicle.setCurrentTotalFee(currentTotalFee + fee);
+        currentVehicle.setLastFee(fee);
+        currentVehicle.setTimeOfLastCameraFlash(timeOfCurrentFlash);
+    }
+
+    private void resetCurrentTotalFeeForNewday(Vehicle[] vehicles, int dayOfMonth, int dayOfMonth2, Vehicle currentVehicle) {
         if (dayOfMonth > dayOfMonth2) {
             for (Vehicle vehicle : vehicles)
             vehicle.setCurrentTotalFee(0);
