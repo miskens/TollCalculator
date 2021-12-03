@@ -15,7 +15,7 @@ public class TollCalculator {
         DayOfWeek day = timeOfCurrentFlash.getDayOfWeek();
 
         if (timeOfLastCameraFlash != null) {
-            resetcurrentTotalFeeIfNewday(vehicles, timeOfCurrentFlash.getDayOfMonth(), timeOfLastCameraFlash.getDayOfMonth(), currentVehicle);
+            resetcurrentTotalFeeForNewday(vehicles, timeOfCurrentFlash.getDayOfMonth(), timeOfLastCameraFlash.getDayOfMonth(), currentVehicle);
         }
 
         if (currentTotalFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
@@ -50,14 +50,8 @@ public class TollCalculator {
         return fee;
     }
 
-    private void resetcurrentTotalFeeIfNewday(Vehicle[] vehicles, int dayOfMonth, int dayOfMonth2, Vehicle currentVehicle) {
-        // If day of this flash > day of last flash:
+    private void resetcurrentTotalFeeForNewday(Vehicle[] vehicles, int dayOfMonth, int dayOfMonth2, Vehicle currentVehicle) {
         if (dayOfMonth > dayOfMonth2) {
-            //      Code to send currentTotal for invoicing or whatever since fees shouldn´t be transferred to next day
-            //      Makes sure the calculation for max 60kr/day can be done using dayOfMonth above
-
-            //      set currentTotal to 0
-            
             for (Vehicle vehicle : vehicles)
             vehicle.setCurrentTotalFee(0);
             }
