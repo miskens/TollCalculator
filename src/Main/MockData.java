@@ -1,7 +1,10 @@
 package Main;
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Random;
+
+import javax.sound.midi.Patch;
 
 import Vehicle.Car;
 import Vehicle.Motorcycle;
@@ -21,24 +24,31 @@ public class MockData {
         return vehicles;
     }
 
-    public LocalDateTime[] getFlashes(int numberOfFLashes) {
-        LocalDateTime[] cameraFlashes = new LocalDateTime[numberOfFLashes];
-       
-        cameraFlashes = getRandomizedCameraFlashes(cameraFlashes);
+    public LocalDateTime[] getLeFlashes() {
+        LocalDateTime[] cameraFlashes = {
+            LocalDateTime.of(2021, 11, 1, 7, 30, 00),
+            LocalDateTime.of(2021, 11, 1, 9, 30, 00),
+            LocalDateTime.of(2021, 11, 1, 12, 30, 00),
+            LocalDateTime.of(2021, 11, 1, 14, 30, 00),
+            LocalDateTime.of(2021, 11, 1, 15, 30, 00),
+            LocalDateTime.of(2021, 11, 1, 16, 30, 00),
+            LocalDateTime.of(2021, 11, 1, 17, 30, 00),
 
-        return cameraFlashes;
-    }
+            LocalDateTime.of(2021, 11, 2, 7, 30, 00),
+            LocalDateTime.of(2021, 11, 2, 8, 10, 00),
+            LocalDateTime.of(2021, 11, 2, 9, 5, 00),
+            LocalDateTime.of(2021, 11, 2, 10, 5, 00),
+            LocalDateTime.of(2021, 11, 2, 11, 5, 00),
+            LocalDateTime.of(2021, 11, 2, 12, 15, 00),
 
-    private LocalDateTime[] getRandomizedCameraFlashes(LocalDateTime[] cameraFlashes) {
-        int day = 1;
-        int randomHour;
-        Random random = new Random();
-
-        for (int i = 0; i < cameraFlashes.length; i++) {
-            randomHour = random.nextInt(23);
-            cameraFlashes[i] = LocalDateTime.of(2021, 11, day, randomHour, 31, 00);
-            day++;
-        }
+            LocalDateTime.of(2021, 11, 3, 6, 30, 00),
+            LocalDateTime.of(2021, 11, 3, 7, 20, 00),
+            LocalDateTime.of(2021, 11, 3, 8, 10, 00),
+            LocalDateTime.of(2021, 11, 3, 9, 40, 00),
+            LocalDateTime.of(2021, 11, 3, 15, 40, 00),
+            LocalDateTime.of(2021, 11, 3, 16, 10, 00),
+            LocalDateTime.of(2021, 11, 3, 16, 20, 00),
+        };
         return cameraFlashes;
     }
 }

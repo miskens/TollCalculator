@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
+import Main.MockData;
 import Main.TollCalculator;
 import Vehicle.Car;
 import Vehicle.Motorcycle;
@@ -14,12 +15,14 @@ public class TollCalculatorTest {
     @Test
     public void testFeesVariesBetween8and18() {
         // setup
+        MockData mock = new MockData();
+        Vehicle[] vehicles = mock.getListOfVehicles();
         Motorcycle mc = new Motorcycle("");
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int mcFee = tc.getTollFee(mc, 0, 0, LocalDateTime.of(2021, 11, 30, 9, 10, 0));
-        int carFee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 9, 10, 0));
-        int rushHourFee = tc.getTollFee(mc, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
+        int mcFee = tc.getTollFee(vehicles, mc, 0, 0, LocalDateTime.of(2021, 11, 30, 9, 10, 0));
+        int carFee = tc.getTollFee(vehicles, car, 0, 0, LocalDateTime.of(2021, 11, 30, 9, 10, 0));
+        int rushHourFee = tc.getTollFee(vehicles, mc, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
 
         // actual
         int[] actual = { mcFee, carFee, rushHourFee };
@@ -54,10 +57,12 @@ public class TollCalculatorTest {
     @Test
     public void testRushHourFeesAppliesForBothHours8And16() {
         // Setup
+        MockData mock = new MockData();
+        Vehicle[] vehicles = mock.getListOfVehicles();
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee8 = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
-        int fee16 = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 16, 10, 0));
+        int fee8 = tc.getTollFee(vehicles, car, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
+        int fee16 = tc.getTollFee(vehicles, car, 0, 0, LocalDateTime.of(2021, 11, 30, 16, 10, 0));
 
         // Actual
         int[] actual = { fee8, fee16 };
@@ -71,12 +76,14 @@ public class TollCalculatorTest {
     }
 
     @Test
-    public void testFeeCanNeverBeHigherThan60() {
+    public void testDailyFeeCanNeverBeHigherThan60() {
         // Setup
+        MockData mock = new MockData();
+        Vehicle[] vehicles = mock.getListOfVehicles();
         int feebefore = 58;
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee = tc.getTollFee(car, 0, feebefore, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
+        int fee = tc.getTollFee(vehicles, car, 0, feebefore, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
         int maxFee = feebefore + fee;
 
         // Actual
@@ -93,11 +100,13 @@ public class TollCalculatorTest {
     @Test
     public void testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee() {
         // Setup
+        MockData mock = new MockData();
+        Vehicle[] vehicles = mock.getListOfVehicles();
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 7, 50, 0)); // To set time of last camera
+        int fee = tc.getTollFee(vehicles, car, 0, 0, LocalDateTime.of(2021, 11, 30, 7, 50, 0)); // To set time of last camera
                                                                                       // flash on car
-        int fee2 = tc.getTollFee(car, 11, 0, LocalDateTime.of(2021, 11, 30, 8, 5, 0));
+        int fee2 = tc.getTollFee(vehicles, car, 11, 0, LocalDateTime.of(2021, 11, 30, 8, 5, 0));
         int maxFee = fee + fee2;
 
         // Actual
@@ -114,11 +123,13 @@ public class TollCalculatorTest {
     @Test
     public void testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee() {
         // Setup
+        MockData mock = new MockData();
+        Vehicle[] vehicles = mock.getListOfVehicles();
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 50, 0)); // To set time of last camera
+        int fee = tc.getTollFee(vehicles, car, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 50, 0)); // To set time of last camera
                                                                                       // flash on car
-        int fee2 = tc.getTollFee(car, 11, 0, LocalDateTime.of(2021, 11, 30, 9, 5, 0));
+        int fee2 = tc.getTollFee(vehicles, car, 11, 0, LocalDateTime.of(2021, 11, 30, 9, 5, 0));
         int maxFee = fee + fee2;
 
         // Actual
@@ -135,10 +146,12 @@ public class TollCalculatorTest {
     @Test
     public void testNoFeeOnSaturdayOrSunday() {
         // setup
+        MockData mock = new MockData();
+        Vehicle[] vehicles = mock.getListOfVehicles();
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
-        int fee = tc.getTollFee(car, 0, 0, LocalDateTime.of(2021, 11, 13, 9, 50, 0)); // Saturday
-        int fee2 = tc.getTollFee(car, 11, 0, LocalDateTime.of(2021, 11, 14, 10, 5, 0)); // Sunday
+        int fee = tc.getTollFee(vehicles,car, 0, 0, LocalDateTime.of(2021, 11, 13, 9, 50, 0)); // Saturday
+        int fee2 = tc.getTollFee(vehicles, car, 11, 0, LocalDateTime.of(2021, 11, 14, 10, 5, 0)); // Sunday
         int noFee = fee + fee2;
 
         // actual

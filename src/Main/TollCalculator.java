@@ -7,12 +7,16 @@ import Vehicle.Vehicle;
 
 public class TollCalculator {
 
-    public int getTollFee(Vehicle currentVehicle, int lastFee, int currentTotalFee, LocalDateTime timeOfCurrentFlash) {
+    public int getTollFee(Vehicle[] vehicles, Vehicle currentVehicle, int lastFee, int currentTotalFee, LocalDateTime timeOfCurrentFlash) {
         String vehicleType = currentVehicle.getClass().getSimpleName();
         int fee;
         int hour = timeOfCurrentFlash.getHour();
-        LocalDateTime timeOfLastCameraFlash;
+        LocalDateTime timeOfLastCameraFlash = currentVehicle.getTimeOfLastCameraFlash();
         DayOfWeek day = timeOfCurrentFlash.getDayOfWeek();
+
+        if (timeOfLastCameraFlash != null) {
+            resetcurrentTotalFeeForNewday(vehicles, timeOfCurrentFlash.getDayOfMonth(), timeOfLastCameraFlash.getDayOfMonth(), currentVehicle);
+        }
 
         if (currentTotalFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
             return 0;
@@ -20,8 +24,7 @@ public class TollCalculator {
 
         fee = getFeeDependingOnHoursAndVehicleType(hour, vehicleType);
 
-        if (currentVehicle.getTimeOfLastCameraFlash() != null) {
-            timeOfLastCameraFlash = currentVehicle.getTimeOfLastCameraFlash();
+        if (currentVehicle.getTimeOfLastCameraFlash() != null) { 
             long minutesSinceLastFlash = timeOfLastCameraFlash.until(timeOfCurrentFlash, ChronoUnit.MINUTES);
 
             if (minutesSinceLastFlash <= 60) {
@@ -45,6 +48,13 @@ public class TollCalculator {
         currentVehicle.setLastFee(fee);
         currentVehicle.setTimeOfLastCameraFlash(timeOfCurrentFlash);
         return fee;
+    }
+
+    private void resetcurrentTotalFeeForNewday(Vehicle[] vehicles, int dayOfMonth, int dayOfMonth2, Vehicle currentVehicle) {
+        if (dayOfMonth > dayOfMonth2) {
+            for (Vehicle vehicle : vehicles)
+            vehicle.setCurrentTotalFee(0);
+            }
     }
 
     private int getFeeDependingOnHoursAndVehicleType(int hour, String vehicleType) {
