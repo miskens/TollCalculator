@@ -9,30 +9,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         MockData mock = new MockData();
         Vehicle[] vehicles = mock.getListOfVehicles();
-        LocalDateTime[] cameraFlashes = mock.getLeFlashes();
-        int currentTotalFee = 0;
-        int lastFee = 0;
-        int fee = 0;
+        LocalDateTime[] cameraFlashes = mock.getFlashes();
 
         printInfoAboutVehicles(vehicles);
-        printAllCameraFlashesInfo(cameraFlashes, vehicles, currentTotalFee, lastFee, fee);
-    }
 
-    private static void printAllCameraFlashesInfo(LocalDateTime[] cameraFlashes, Vehicle[] vehicles, int currentTotalFee,
-                                                            int lastFee, int fee) {
-        TollCalculator tc = new TollCalculator();
-        int rowNr = 1;
-        for (LocalDateTime flash : cameraFlashes) {
-            Random random = new Random();
-            Vehicle vehicle = vehicles[random.nextInt(vehicles.length)];
-            currentTotalFee = vehicle.getCurrentTotalFee();
-            lastFee = vehicle.getLastFee();
-            fee = tc.getTollFee(vehicles, vehicle, lastFee, currentTotalFee, flash);
-
-            System.out.println("Camera flash nr: " + rowNr);
-            printCurrentCamerFlashInfo(rowNr, vehicle, flash, currentTotalFee, fee);
-            rowNr++;
-        }
+        printAllCameraFlashesInfo(cameraFlashes, vehicles);
     }
 
     private static void printInfoAboutVehicles(Vehicle[] vehicles) {
@@ -47,7 +28,29 @@ public class Main {
         System.out.println();
     }
 
-    private static void printCurrentCamerFlashInfo(int rowNr, Vehicle vehicle, LocalDateTime flash, int currentTotalFee,
+    private static void printAllCameraFlashesInfo(LocalDateTime[] cameraFlashes, Vehicle[] vehicles) {
+        TollCalculator tc = new TollCalculator();
+        Random random = new Random();
+        int currentTotalFee = 0;
+        int lastFee = 0;
+        int fee = 0;
+        int rowNr = 1;
+        
+        for (LocalDateTime flash : cameraFlashes) {
+            Vehicle randomVehicle = vehicles[random.nextInt(vehicles.length)];
+            currentTotalFee = randomVehicle.getCurrentTotalFee();
+            lastFee = randomVehicle.getLastFee();
+
+            fee = tc.getTollFee(vehicles, randomVehicle, lastFee, currentTotalFee, flash);
+
+            System.out.println("Camera flash nr: " + rowNr);
+
+            printCurrentCameraFlashInfo(rowNr, randomVehicle, flash, currentTotalFee, fee);
+            rowNr++;
+        }
+    }
+
+    private static void printCurrentCameraFlashInfo(int rowNr, Vehicle vehicle, LocalDateTime flash, int currentTotalFee,
             int fee) {
 
         String vehicleSubclass = vehicle.getClass().getSimpleName();

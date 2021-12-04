@@ -19,7 +19,7 @@ public class MockData {
         return vehicles;
     }
 
-    public LocalDateTime[] getLeFlashes() {
+    public LocalDateTime[] getFlashes() {
         LocalDateTime[] cameraFlashes = {
             LocalDateTime.of(2021, 11, 1, 7, 30, 00),
             LocalDateTime.of(2021, 11, 1, 9, 30, 00),
