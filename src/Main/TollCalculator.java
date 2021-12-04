@@ -8,9 +8,7 @@ import Vehicle.Vehicle;
 public class TollCalculator {
 
     public int getTollFee(Vehicle[] vehicles, Vehicle currentVehicle, int lastFee, int currentTotalFee, LocalDateTime timeOfCurrentFlash) {
-        String vehicleType = currentVehicle.getClass().getSimpleName();
-        int fee;
-        int hour = timeOfCurrentFlash.getHour();
+        int fee = 0;
         LocalDateTime timeOfLastCameraFlash = currentVehicle.getTimeOfLastCameraFlash();
         DayOfWeek day = timeOfCurrentFlash.getDayOfWeek();
 
@@ -22,9 +20,7 @@ public class TollCalculator {
             return 0;
         }
 
-        fee = getFeeDependingOnHoursAndVehicleType(hour, vehicleType);
-
-        fee = calculateFeeWithinSameHour(currentVehicle, timeOfLastCameraFlash, timeOfCurrentFlash, lastFee, fee);
+        fee = calculateHours(currentVehicle, timeOfLastCameraFlash, timeOfCurrentFlash, lastFee, fee);
 
         if (currentTotalFee + fee >= 60) {
             currentVehicle.setCurrentTotalFee(60);
@@ -32,6 +28,17 @@ public class TollCalculator {
         }
 
         updateCurrentVehicle(currentVehicle, currentTotalFee, fee, timeOfCurrentFlash);
+
+        return fee;
+    }
+
+    private int calculateHours(Vehicle currentVehicle, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, int lastFee, int fee) {
+        String vehicleType = currentVehicle.getClass().getSimpleName();
+        int hour = timeOfCurrentFlash.getHour();
+
+        fee = getFeeDependingOnHoursAndVehicleType(hour, vehicleType);
+
+        fee = calculateFeeWithinSameHour(currentVehicle, timeOfLastCameraFlash, timeOfCurrentFlash, lastFee, fee);
 
         return fee;
     }
