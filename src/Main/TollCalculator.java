@@ -10,13 +10,10 @@ public class TollCalculator {
     public int getTollFee(Vehicle[] vehicles, Vehicle currentVehicle, int lastFee, int currentTotalFee, LocalDateTime timeOfCurrentFlash) {
         int fee = 0;
         LocalDateTime timeOfLastCameraFlash = currentVehicle.getTimeOfLastCameraFlash();
-        DayOfWeek day = timeOfCurrentFlash.getDayOfWeek();
 
-        if (timeOfLastCameraFlash != null) {
-            resetCurrentTotalFeeForNewday(vehicles, timeOfCurrentFlash.getDayOfMonth(), timeOfLastCameraFlash.getDayOfMonth(), currentVehicle);
-        }
+        boolean zeroFee = checkIfNewDayOrZeroFee(vehicles, timeOfLastCameraFlash, timeOfCurrentFlash, currentVehicle, currentTotalFee);
 
-        if (currentTotalFee >= 60 || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
+        if(zeroFee) {
             return 0;
         }
 
@@ -30,6 +27,33 @@ public class TollCalculator {
         updateCurrentVehicle(currentVehicle, currentTotalFee, fee, timeOfCurrentFlash);
 
         return fee;
+    }
+
+    private boolean checkIfNewDayOrZeroFee(Vehicle[] vehicles, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, Vehicle currentVehicle,
+                                                int currentTotalFee) {
+        resetFeeIfNewDay(vehicles, timeOfCurrentFlash, timeOfLastCameraFlash, currentVehicle);
+        
+        boolean zeroFee = checkIfZeroFee(timeOfCurrentFlash, currentTotalFee);
+
+        return zeroFee;
+    }
+
+    private boolean checkIfZeroFee(LocalDateTime timeOfCurrentFlash, int currentTotalFee) {
+        DayOfWeek dayName = timeOfCurrentFlash.getDayOfWeek();
+        if (currentTotalFee >= 60 || dayName == DayOfWeek.SATURDAY || dayName == DayOfWeek.SUNDAY) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private void resetFeeIfNewDay(Vehicle[] vehicles, LocalDateTime timeOfCurrentFlash, LocalDateTime timeOfLastCameraFlash, Vehicle currentVehicle) {
+        int dayOfCurrentFlash = timeOfCurrentFlash.getDayOfMonth();
+        if (timeOfLastCameraFlash != null) {
+            int dayOfLastFlash = timeOfLastCameraFlash.getDayOfMonth();
+            resetCurrentTotalFeeForNewday(vehicles, dayOfCurrentFlash, dayOfLastFlash, currentVehicle);
+        }
     }
 
     private int calculateHours(Vehicle currentVehicle, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, int lastFee, int fee) {
