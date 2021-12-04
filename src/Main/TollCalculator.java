@@ -19,7 +19,9 @@ public class TollCalculator {
 
         fee = calculateHours(currentVehicle, timeOfLastCameraFlash, timeOfCurrentFlash, lastFee, fee);
 
-        if (currentTotalFee + fee >= 60) {
+        boolean reachesTotalDailyFee = checkIfNewFeeReachesDailyTotalFee(currentTotalFee, fee);
+
+        if (reachesTotalDailyFee) {
             currentVehicle.setCurrentTotalFee(60);
             return 60 - currentTotalFee;
         }
@@ -27,6 +29,15 @@ public class TollCalculator {
         updateCurrentVehicle(currentVehicle, currentTotalFee, fee, timeOfCurrentFlash);
 
         return fee;
+    }
+
+    private boolean checkIfNewFeeReachesDailyTotalFee(int currentTotalFee, int fee) {
+        if (currentTotalFee + fee >= 60) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkIfNewDayOrZeroFee(Vehicle[] vehicles, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, Vehicle currentVehicle,
