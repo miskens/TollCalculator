@@ -52,7 +52,6 @@ public class Main {
 
     private static void printCurrentCameraFlashInfo(int rowNr, Vehicle vehicle, LocalDateTime flash, int currentTotalFee,
             int fee) {
-
         String vehicleSubclass = vehicle.getClass().getSimpleName();
         System.out.println(vehicleSubclass + " with regNr: '" + vehicle.getRegNr() + ":");
 
@@ -61,8 +60,7 @@ public class Main {
         } else if (flash.getDayOfWeek() == DayOfWeek.SATURDAY || flash.getDayOfWeek() == DayOfWeek.SUNDAY) {
             System.out.println("Weekend! Toll is " + fee + " kr.");
         } else {
-            System.out
-                    .println("Passed on a " + flash.getDayOfWeek() + " at hour " + flash.getHour() + ": " + fee + " kr.");
+            System.out.println("Passed on a " + flash.getDayOfWeek() + " at hour " + flash.getHour() + ": " + fee + " kr.");
         }
         System.out.println("Total Fee of Vehicle above today: " + vehicle.getCurrentTotalFee() + " kr.\n");
     }
