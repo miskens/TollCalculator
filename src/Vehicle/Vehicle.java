@@ -32,10 +32,6 @@ public class Vehicle {
         this.lastFee = fee;
     }
 
-    public String getRegNr() {
-        return this.regNr;
-    }
-
     public LocalDateTime getTimeOfLastCameraFlash() {
         return this.timeOfLastCameraFlash;
     }
@@ -44,6 +40,10 @@ public class Vehicle {
         this.timeOfLastCameraFlash = timeofLastCameraFlash;
     }
 
+    public String getRegNr() {
+        return this.regNr;
+    }
+    
     public static int getNrOfVehicles() {
         return nrOfVehicles;
     }
