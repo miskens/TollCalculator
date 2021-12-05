@@ -1,8 +1,6 @@
 package Vehicle;
 
-import Interfaces.ITollable;
-
-public class Motorcycle extends Vehicle implements ITollable {
+public class Motorcycle extends Vehicle {
     public Motorcycle(String regNr) {
         super(regNr);
         this.regNr = regNr;

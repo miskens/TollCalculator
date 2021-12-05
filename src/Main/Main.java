@@ -1,5 +1,6 @@
 package Main;
 
+import Vehicle.Car;
 import Vehicle.Vehicle;
 import java.util.Random;
 import java.time.DayOfWeek;
@@ -38,6 +39,7 @@ public class Main {
         
         for (LocalDateTime flash : cameraFlashes) {
             Vehicle randomVehicle = vehicles[random.nextInt(vehicles.length)];
+
             currentTotalFee = randomVehicle.getCurrentTotalFee();
             lastFee = randomVehicle.getLastFee();
 
