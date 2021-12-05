@@ -1,6 +1,5 @@
 package Main;
 
-import Vehicle.Car;
 import Vehicle.Vehicle;
 import java.util.Random;
 import java.time.DayOfWeek;
