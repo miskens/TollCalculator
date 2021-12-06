@@ -1,13 +1,14 @@
 package Main;
 
 import java.time.LocalDateTime;
+
+import Interfaces.ITollable;
 import Vehicle.Car;
 import Vehicle.Motorcycle;
-import Vehicle.Vehicle;
 
 public class MockData {
-    public Vehicle[] getListOfVehicles() {
-        Vehicle[] vehicles = {
+    public ITollable[] getListOfVehicles() {
+        ITollable[] vehicles = {
             new Car("678 iao"),
             new Car("272 ztc"),
             new Car("479 hdy"),

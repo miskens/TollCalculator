@@ -2,13 +2,16 @@ package Main;
 
 import Vehicle.Vehicle;
 import java.util.Random;
+
+import Interfaces.ITollable;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         MockData mock = new MockData();
-        Vehicle[] vehicles = mock.getListOfVehicles();
+        ITollable[] vehicles = mock.getListOfVehicles();
         LocalDateTime[] cameraFlashes = mock.getFlashes();
 
         printInfoAboutVehicles(vehicles);
@@ -16,19 +19,19 @@ public class Main {
         printAllCameraFlashesInfo(cameraFlashes, vehicles);
     }
 
-    private static void printInfoAboutVehicles(Vehicle[] vehicles) {
+    private static void printInfoAboutVehicles(ITollable[] vehicles) {
         System.out.println("Number of Vehicles used in this program: " + Vehicle.getNrOfVehicles());
         System.out.println("These are the vehicles:\n");
 
         String vehicleSubclass;
-        for (Vehicle v : vehicles) {
+        for (ITollable v : vehicles) {
             vehicleSubclass = v.getClass().getSimpleName();
             System.out.println(vehicleSubclass + " with regNr: " + v.getRegNr());
         }
         System.out.println();
     }
 
-    private static void printAllCameraFlashesInfo(LocalDateTime[] cameraFlashes, Vehicle[] vehicles) {
+    private static void printAllCameraFlashesInfo(LocalDateTime[] cameraFlashes, ITollable[] vehicles) {
         TollCalculator tc = new TollCalculator();
         Random random = new Random();
         int currentTotalFee = 0;
@@ -37,7 +40,7 @@ public class Main {
         int rowNr = 1;
         
         for (LocalDateTime flash : cameraFlashes) {
-            Vehicle randomVehicle = vehicles[random.nextInt(vehicles.length)];
+            ITollable randomVehicle = vehicles[random.nextInt(vehicles.length)];
 
             currentTotalFee = randomVehicle.getCurrentTotalFee();
             lastFee = randomVehicle.getLastFee();
@@ -51,7 +54,7 @@ public class Main {
         }
     }
 
-    private static void printCurrentCameraFlashInfo(int rowNr, Vehicle vehicle, LocalDateTime flash, int currentTotalFee,
+    private static void printCurrentCameraFlashInfo(int rowNr, ITollable vehicle, LocalDateTime flash, int currentTotalFee,
             int fee) {
         String vehicleSubclass = vehicle.getClass().getSimpleName();
         System.out.println(vehicleSubclass + " with regNr: '" + vehicle.getRegNr() + ":");

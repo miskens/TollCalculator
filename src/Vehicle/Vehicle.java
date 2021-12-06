@@ -16,30 +16,6 @@ public class Vehicle {
         nrOfVehicles++;
     }
 
-    public int getCurrentTotalFee() {
-        return this.currentTotalFee;
-    }
-
-    public void setCurrentTotalFee(int fee) {
-        this.currentTotalFee = fee;
-    }
-
-    public int getLastFee() {
-        return this.lastFee;
-    }
-
-    public void setLastFee(int fee) {
-        this.lastFee = fee;
-    }
-
-    public LocalDateTime getTimeOfLastCameraFlash() {
-        return this.timeOfLastCameraFlash;
-    }
-
-    public void setTimeOfLastCameraFlash(LocalDateTime timeofLastCameraFlash) {
-        this.timeOfLastCameraFlash = timeofLastCameraFlash;
-    }
-
     public String getRegNr() {
         return this.regNr;
     }

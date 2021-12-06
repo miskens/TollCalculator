@@ -3,11 +3,12 @@ package Main;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import Vehicle.Vehicle;
+
+import Interfaces.ITollable;
 
 public class TollCalculator {
 
-    public int getTollFee(Vehicle[] vehicles, Vehicle currentVehicle, int lastFee, int currentTotalFee, LocalDateTime timeOfCurrentFlash) {
+    public int getTollFee(ITollable[] vehicles, ITollable currentVehicle, int lastFee, int currentTotalFee, LocalDateTime timeOfCurrentFlash) {
         int fee = 0;
         LocalDateTime timeOfLastCameraFlash = currentVehicle.getTimeOfLastCameraFlash();
 
@@ -40,7 +41,7 @@ public class TollCalculator {
         }
     }
 
-    private boolean checkIfNewDayOrZeroFee(Vehicle[] vehicles, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, Vehicle currentVehicle,
+    private boolean checkIfNewDayOrZeroFee(ITollable[] vehicles, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, ITollable currentVehicle,
                                                 int currentTotalFee) {
         resetFeeIfNewDay(vehicles, timeOfCurrentFlash, timeOfLastCameraFlash, currentVehicle);
         
@@ -59,7 +60,7 @@ public class TollCalculator {
         }
     }
 
-    private void resetFeeIfNewDay(Vehicle[] vehicles, LocalDateTime timeOfCurrentFlash, LocalDateTime timeOfLastCameraFlash, Vehicle currentVehicle) {
+    private void resetFeeIfNewDay(ITollable[] vehicles, LocalDateTime timeOfCurrentFlash, LocalDateTime timeOfLastCameraFlash, ITollable currentVehicle) {
         int dayOfCurrentFlash = timeOfCurrentFlash.getDayOfMonth();
         if (timeOfLastCameraFlash != null) {
             int dayOfLastFlash = timeOfLastCameraFlash.getDayOfMonth();
@@ -67,7 +68,7 @@ public class TollCalculator {
         }
     }
 
-    private int calculateHours(Vehicle currentVehicle, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, int lastFee, int fee) {
+    private int calculateHours(ITollable currentVehicle, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, int lastFee, int fee) {
         String vehicleType = currentVehicle.getClass().getSimpleName();
         int hour = timeOfCurrentFlash.getHour();
 
@@ -78,7 +79,7 @@ public class TollCalculator {
         return fee;
     }
 
-    private int calculateFeeWithinSameHour(Vehicle currentVehicle, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash,
+    private int calculateFeeWithinSameHour(ITollable currentVehicle, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash,
                                                         int lastFee, int fee) {
         if (currentVehicle.getTimeOfLastCameraFlash() != null) { 
             long minutesSinceLastFlash = timeOfLastCameraFlash.until(timeOfCurrentFlash, ChronoUnit.MINUTES);
@@ -98,15 +99,15 @@ public class TollCalculator {
         return fee;
     }
 
-    private void updateCurrentVehicle(Vehicle currentVehicle, int currentTotalFee, int fee, LocalDateTime timeOfCurrentFlash) {
+    private void updateCurrentVehicle(ITollable currentVehicle, int currentTotalFee, int fee, LocalDateTime timeOfCurrentFlash) {
         currentVehicle.setCurrentTotalFee(currentTotalFee + fee);
         currentVehicle.setLastFee(fee);
         currentVehicle.setTimeOfLastCameraFlash(timeOfCurrentFlash);
     }
 
-    private void resetCurrentTotalFeeForNewday(Vehicle[] vehicles, int dayOfMonth, int dayOfMonth2, Vehicle currentVehicle) {
+    private void resetCurrentTotalFeeForNewday(ITollable[] vehicles, int dayOfMonth, int dayOfMonth2, ITollable currentVehicle) {
         if (dayOfMonth > dayOfMonth2) {
-            for (Vehicle vehicle : vehicles)
+            for (ITollable vehicle : vehicles)
             vehicle.setCurrentTotalFee(0);
             }
     }
