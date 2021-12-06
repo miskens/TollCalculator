@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
+import Interfaces.ITollable;
 import Main.MockData;
 import Main.TollCalculator;
 import Vehicle.Car;
@@ -16,7 +17,7 @@ public class TollCalculatorTest {
     public void testFeesVariesBetween8and18() {
         // setup
         MockData mock = new MockData();
-        Vehicle[] vehicles = mock.getListOfVehicles();
+        ITollable[] vehicles = mock.getListOfVehicles();
         Motorcycle mc = new Motorcycle("");
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
@@ -58,7 +59,7 @@ public class TollCalculatorTest {
     public void testRushHourFeesAppliesForBothHours8And16() {
         // Setup
         MockData mock = new MockData();
-        Vehicle[] vehicles = mock.getListOfVehicles();
+        ITollable[] vehicles = mock.getListOfVehicles();
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
         int fee8 = tc.getTollFee(vehicles, car, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 10, 0));
@@ -79,7 +80,7 @@ public class TollCalculatorTest {
     public void testDailyFeeCanNeverBeHigherThan60() {
         // Setup
         MockData mock = new MockData();
-        Vehicle[] vehicles = mock.getListOfVehicles();
+        ITollable[] vehicles = mock.getListOfVehicles();
         int feebefore = 58;
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
@@ -101,7 +102,7 @@ public class TollCalculatorTest {
     public void testOnlyHighestFeeAppliedWithinSameHourWhenLastFeeWasLowerThanCurrentFee() {
         // Setup
         MockData mock = new MockData();
-        Vehicle[] vehicles = mock.getListOfVehicles();
+        ITollable[] vehicles = mock.getListOfVehicles();
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
         int fee = tc.getTollFee(vehicles, car, 0, 0, LocalDateTime.of(2021, 11, 30, 7, 50, 0)); // To set time of last camera
@@ -124,7 +125,7 @@ public class TollCalculatorTest {
     public void testOnlyHighestFeeAppliedWithinSameHourWhenCurrentFeeWasLowerThanCLastFee() {
         // Setup
         MockData mock = new MockData();
-        Vehicle[] vehicles = mock.getListOfVehicles();
+        ITollable[] vehicles = mock.getListOfVehicles();
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
         int fee = tc.getTollFee(vehicles, car, 0, 0, LocalDateTime.of(2021, 11, 30, 8, 50, 0)); // To set time of last camera
@@ -147,7 +148,7 @@ public class TollCalculatorTest {
     public void testNoFeeOnSaturdayOrSunday() {
         // setup
         MockData mock = new MockData();
-        Vehicle[] vehicles = mock.getListOfVehicles();
+        ITollable[] vehicles = mock.getListOfVehicles();
         Car car = new Car("");
         TollCalculator tc = new TollCalculator();
         int fee = tc.getTollFee(vehicles,car, 0, 0, LocalDateTime.of(2021, 11, 13, 9, 50, 0)); // Saturday
