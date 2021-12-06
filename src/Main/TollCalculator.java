@@ -12,7 +12,9 @@ public class TollCalculator {
         int fee = 0;
         LocalDateTime timeOfLastCameraFlash = currentVehicle.getTimeOfLastCameraFlash();
 
-        boolean zeroFee = checkIfNewDayOrZeroFee(vehicles, timeOfLastCameraFlash, timeOfCurrentFlash, currentVehicle, currentTotalFee);
+        resetFeeIfNewDay(vehicles, timeOfCurrentFlash, timeOfLastCameraFlash);
+
+        boolean zeroFee = checkIfZeroFee(timeOfCurrentFlash, currentTotalFee);
 
         if(zeroFee) {
             return 0;
@@ -41,15 +43,6 @@ public class TollCalculator {
         }
     }
 
-    private boolean checkIfNewDayOrZeroFee(ITollable[] vehicles, LocalDateTime timeOfLastCameraFlash, LocalDateTime timeOfCurrentFlash, ITollable currentVehicle,
-                                                int currentTotalFee) {
-        resetFeeIfNewDay(vehicles, timeOfCurrentFlash, timeOfLastCameraFlash, currentVehicle);
-        
-        boolean zeroFee = checkIfZeroFee(timeOfCurrentFlash, currentTotalFee);
-
-        return zeroFee;
-    }
-
     private boolean checkIfZeroFee(LocalDateTime timeOfCurrentFlash, int currentTotalFee) {
         DayOfWeek dayName = timeOfCurrentFlash.getDayOfWeek();
         if (currentTotalFee >= 60 || dayName == DayOfWeek.SATURDAY || dayName == DayOfWeek.SUNDAY) {
@@ -60,11 +53,11 @@ public class TollCalculator {
         }
     }
 
-    private void resetFeeIfNewDay(ITollable[] vehicles, LocalDateTime timeOfCurrentFlash, LocalDateTime timeOfLastCameraFlash, ITollable currentVehicle) {
+    private void resetFeeIfNewDay(ITollable[] vehicles, LocalDateTime timeOfCurrentFlash, LocalDateTime timeOfLastCameraFlash) {
         int dayOfCurrentFlash = timeOfCurrentFlash.getDayOfMonth();
         if (timeOfLastCameraFlash != null) {
             int dayOfLastFlash = timeOfLastCameraFlash.getDayOfMonth();
-            resetCurrentTotalFeeForNewday(vehicles, dayOfCurrentFlash, dayOfLastFlash, currentVehicle);
+            resetCurrentTotalFeeForNewday(vehicles, dayOfCurrentFlash, dayOfLastFlash);
         }
     }
 
@@ -105,8 +98,8 @@ public class TollCalculator {
         currentVehicle.setTimeOfLastCameraFlash(timeOfCurrentFlash);
     }
 
-    private void resetCurrentTotalFeeForNewday(ITollable[] vehicles, int dayOfMonth, int dayOfMonth2, ITollable currentVehicle) {
-        if (dayOfMonth > dayOfMonth2) {
+    private void resetCurrentTotalFeeForNewday(ITollable[] vehicles, int dayOfLastFlash, int dayOfCurrentFlash) {
+        if (dayOfCurrentFlash > dayOfLastFlash) {
             for (ITollable vehicle : vehicles)
             vehicle.setCurrentTotalFee(0);
             }
